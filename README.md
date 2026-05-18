@@ -26,6 +26,4 @@ A full-stack web application built using React.js, Node.js, Express.js, and MySQ
 * USN
 * Phone Number
 
-## Author
 
-Koushik Shetty
