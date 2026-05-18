@@ -55,6 +55,25 @@ app.post("/add-user", (req, res) => {
   });
 });
 
+//delete 
+// Delete user
+app.delete("/delete-user/:id", (req, res) => {
+
+  const id = req.params.id;
+
+  const sql = "DELETE FROM users WHERE id = ?";
+
+  db.query(sql, [id], (err, result) => {
+
+    if (err) {
+      res.send(err);
+    } else {
+      res.send("User Deleted");
+    }
+
+  });
+
+});
 app.listen(5000, () => {
   console.log("Server running on port 5000");
 });
