@@ -80,7 +80,7 @@ function App() {
       />
 
       <button onClick={addUser}>
-        Add User
+        Submit
       </button>
 
       <hr />
