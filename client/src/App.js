@@ -7,6 +7,8 @@ function App() {
   const [users, setUsers] = useState([]);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [usn, setUsn] = useState("");
+  const [phone, setPhone] = useState("");
 
   // Fetch users
   useEffect(() => {
@@ -24,7 +26,8 @@ function App() {
     axios.post("http://127.0.0.1:5000/add-user", {
       name,
       email,
-    
+      usn,
+      phone
     }).then(() => {
 
       alert("User Added");
@@ -51,7 +54,7 @@ function App() {
 
     <div className="container">
 
-      <h1>MySQL React Website</h1>
+      <h1>Student Details</h1>
 
       <input
         type="text"
@@ -63,6 +66,17 @@ function App() {
         type="email"
         placeholder="Enter Email"
         onChange={(e) => setEmail(e.target.value)}
+      />
+      <input
+        type="text"
+        placeholder="Enter USN"
+        onChange={(e) => setUsn(e.target.value)}
+      />
+
+      <input
+        type="text"
+        placeholder="Enter Phone Number"
+        onChange={(e) => setPhone(e.target.value)}
       />
 
       <button onClick={addUser}>
@@ -78,6 +92,10 @@ function App() {
           <h3>{user.name}</h3>
 
           <p>{user.email}</p>
+
+           <p>{user.usn}</p>
+
+          <p>{user.phone}</p>
 
           <button onClick={() => deleteUser(user.id)}>
             Delete

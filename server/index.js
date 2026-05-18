@@ -14,48 +14,62 @@ const db = mysql.createConnection({
   database: "mydb"
 });
 
+// Database connection
 db.connect((err) => {
+
   if (err) {
     console.log("Database connection failed");
+    console.log(err);
   } else {
     console.log("MySQL Connected");
   }
+
 });
 
-// API
+// Home API
 app.get("/", (req, res) => {
+
   res.send("Backend Running");
+
 });
 
-// Get users
+// Get all users
 app.get("/users", (req, res) => {
+
   const sql = "SELECT * FROM users";
 
   db.query(sql, (err, result) => {
+
     if (err) {
       res.send(err);
     } else {
       res.send(result);
     }
+
   });
+
 });
 
 // Add user
 app.post("/add-user", (req, res) => {
-  const { name, email } = req.body;
 
-  const sql = "INSERT INTO users (name, email) VALUES (?, ?)";
+  const { name, email, usn, phone } = req.body;
 
-  db.query(sql, [name, email], (err, result) => {
+  const sql =
+    "INSERT INTO users (name, email, usn, phone) VALUES (?, ?, ?, ?)";
+
+  db.query(sql, [name, email, usn, phone], (err, result) => {
+
     if (err) {
       res.send(err);
     } else {
       res.send("User Added");
     }
+
   });
+
 });
 
-//delete 
 // Delete user
 app.delete("/delete-user/:id", (req, res) => {
 
@@ -74,6 +88,10 @@ app.delete("/delete-user/:id", (req, res) => {
   });
 
 });
+
+// Start server
 app.listen(5000, () => {
+
   console.log("Server running on port 5000");
+
 });
