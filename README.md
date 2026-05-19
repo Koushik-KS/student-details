@@ -1,4 +1,4 @@
-## Deploy: https://delightful-faloodeh-fad220.netlify.app/
+## Deploy: https://delicate-bavarois-d566c0.netlify.app/
 
 
 # Student Management System
