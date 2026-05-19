@@ -13,7 +13,7 @@ function App() {
   // Fetch users
   useEffect(() => {
 
-    axios.get("http://127.0.0.1:5000/users")
+    axios.get("https://student-details.onrender.com/users")
       .then((res) => {
         setUsers(res.data);
       });
@@ -23,7 +23,7 @@ function App() {
   // Add user
   const addUser = () => {
 
-    axios.post("http://127.0.0.1:5000/add-user", {
+    axios.post("https://student-details.onrender.com/add-user", {
       name,
       email,
       usn,
@@ -40,7 +40,7 @@ function App() {
   // Delete user
   const deleteUser = (id) => {
 
-    axios.delete(`http://127.0.0.1:5000/delete-user/${id}`)
+    axios.delete(`https://student-details.onrender.com/delete-user/${id}`)
       .then(() => {
 
         alert("User Deleted");

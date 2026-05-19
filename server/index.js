@@ -7,21 +7,29 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// MySQL Connection
 const db = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "2006@Koushi",
-  database: "mydb"
+
+  host: process.env.MYSQLHOST,
+  user: process.env.MYSQLUSER,
+  password: process.env.MYSQLPASSWORD,
+  database: process.env.MYSQLDATABASE,
+  port: process.env.MYSQLPORT
+
 });
 
 // Database connection
 db.connect((err) => {
 
   if (err) {
+
     console.log("Database connection failed");
     console.log(err);
+
   } else {
+
     console.log("MySQL Connected");
+
   }
 
 });
@@ -41,9 +49,13 @@ app.get("/users", (req, res) => {
   db.query(sql, (err, result) => {
 
     if (err) {
+
       res.send(err);
+
     } else {
+
       res.send(result);
+
     }
 
   });
@@ -61,9 +73,13 @@ app.post("/add-user", (req, res) => {
   db.query(sql, [name, email, usn, phone], (err, result) => {
 
     if (err) {
+
       res.send(err);
+
     } else {
+
       res.send("User Added");
+
     }
 
   });
@@ -80,15 +96,18 @@ app.delete("/delete-user/:id", (req, res) => {
   db.query(sql, [id], (err, result) => {
 
     if (err) {
+
       res.send(err);
+
     } else {
+
       res.send("User Deleted");
+
     }
 
   });
 
 });
-
 
 const PORT = process.env.PORT || 5000;
 
