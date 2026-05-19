@@ -10,28 +10,57 @@ function App() {
   const [usn, setUsn] = useState("");
   const [phone, setPhone] = useState("");
 
+  const API = "https://student-details-lnga.onrender.com";
+
   // Fetch users
+  const fetchUsers = () => {
+
+    axios.get(`${API}/users`)
+      .then((res) => {
+
+        setUsers(res.data);
+
+      })
+      .catch((err) => {
+
+        console.log(err);
+
+      });
+
+  };
+
   useEffect(() => {
 
-    axios.get("https://student-details.onrender.com/users")
-      .then((res) => {
-        setUsers(res.data);
-      });
+    fetchUsers();
 
   }, []);
 
   // Add user
   const addUser = () => {
 
-    axios.post("https://student-details.onrender.com/add-user", {
+    axios.post(`${API}/add-user`, {
+
       name,
       email,
       usn,
       phone
-    }).then(() => {
+
+    })
+    .then(() => {
 
       alert("User Added");
-      window.location.reload();
+
+      setName("");
+      setEmail("");
+      setUsn("");
+      setPhone("");
+
+      fetchUsers();
+
+    })
+    .catch((err) => {
+
+      console.log(err);
 
     });
 
@@ -40,11 +69,17 @@ function App() {
   // Delete user
   const deleteUser = (id) => {
 
-    axios.delete(`https://student-details.onrender.com/delete-user/${id}`)
+    axios.delete(`${API}/delete-user/${id}`)
       .then(() => {
 
         alert("User Deleted");
-        window.location.reload();
+
+        fetchUsers();
+
+      })
+      .catch((err) => {
+
+        console.log(err);
 
       });
 
@@ -59,23 +94,28 @@ function App() {
       <input
         type="text"
         placeholder="Enter Name"
+        value={name}
         onChange={(e) => setName(e.target.value)}
       />
 
       <input
         type="email"
         placeholder="Enter Email"
+        value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
+
       <input
         type="text"
         placeholder="Enter USN"
+        value={usn}
         onChange={(e) => setUsn(e.target.value)}
       />
 
       <input
         type="text"
         placeholder="Enter Phone Number"
+        value={phone}
         onChange={(e) => setPhone(e.target.value)}
       />
 
@@ -93,7 +133,7 @@ function App() {
 
           <p>{user.email}</p>
 
-           <p>{user.usn}</p>
+          <p>{user.usn}</p>
 
           <p>{user.phone}</p>
 
