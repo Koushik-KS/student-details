@@ -1,4 +1,4 @@
-## Deploy:https://inquisitive-jelly-115eeb.netlify.app/
+## Deploy: https://inquisitive-jelly-115eeb.netlify.app/
 
 
 # Student Management System
